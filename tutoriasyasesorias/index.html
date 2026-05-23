@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorías y Asesorías - Grupo 3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Módulo de Tutorías y Asesorías</h1>
+    </header>
+
+    <main class="contenedor">
+        <section class="filtros card-container">
+            <h2>Buscar Asesorías</h2>
+            <div class="filtros-controles">
+                <input type="text" id="input-busqueda" placeholder="Buscar por docente...">
+                <select id="select-materia">
+                    <option value="Todas">Todas las materias</option>
+                    <option value="Programación Web">Programación Web</option>
+                    <option value="Matemáticas Discretas">Matemáticas Discretas</option>
+                    <option value="Bases de Datos">Bases de Datos</option>
+                    <option value="Física">Física</option>
+                    <option value="Ingeniería de Software">Ingeniería de Software</option>
+                    <option value="Redes">Redes</option>
+                </select>
+            </div>
+        </section>
+
+        <div class="layout-principal">
+            
+            <section class="listado">
+                <h2>Asesorías Disponibles</h2>
+                <div id="contenedor-tarjetas" class="grid-tarjetas">
+                    </div>
+            </section>
+
+            <aside class="formulario-seccion card-container">
+                <h2 id="titulo-formulario">Solicitar Nueva Asesoría</h2>
+                
+                <div id="mensaje-error" class="oculto"></div>
+                
+                <form id="form-solicitud">
+                    <input type="hidden" id="tutoria-id">
+
+                    <label for="docente">Docente:</label>
+                    <input type="text" id="docente" placeholder="Ej. Juan Pérez">
+                    
+                    <label for="materia">Materia:</label>
+                    <select id="materia">
+                        <option value="" disabled selected>Selecciona una materia...</option>
+                        <option value="Programación Web">Programación Web</option>
+                        <option value="Matemáticas Discretas">Matemáticas Discretas</option>
+                        <option value="Bases de Datos">Bases de Datos</option>
+                        <option value="Física">Física</option>
+                        <option value="Ingeniería de Software">Ingeniería de Software</option>
+                        <option value="Redes">Redes</option>
+                    </select>
+                    
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha">
+
+                    <button type="submit" id="btn-submit">Registrar Solicitud</button>
+                    <button type="button" id="btn-cancelar" class="btn-rojo oculto">Cancelar Edición</button>
+                </form>
+            </aside>
+            
+        </div>
+    </main>
+
+    <div id="modal-detalle" class="modal oculto">
+        <div class="modal-contenido">
+            <span id="cerrar-modal" class="cerrar">&times;</span>
+            <h2 id="modal-materia"></h2>
+            <div class="modal-body">
+                <p><strong>Docente:</strong> <span id="modal-docente"></span></p>
+                <p><strong>Fecha:</strong> <span id="modal-fecha"></span></p>
+                <p><strong>Estado:</strong> <span id="modal-estado"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
