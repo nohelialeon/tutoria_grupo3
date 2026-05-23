@@ -32,7 +32,6 @@ const tituloFormulario = document.getElementById('titulo-formulario');
 
 let editandoId = null;
 
-// ── TOAST ─────────────────────────────────────────────────────────────────────
 function showToast(msg, tipo = 'ok') {
     const el = document.getElementById('toast');
     el.textContent = msg;
