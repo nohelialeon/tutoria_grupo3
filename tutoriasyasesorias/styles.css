@@ -26,7 +26,6 @@ body {
   padding-bottom: 60px;
 }
 
-/* ── HEADER ── */
 .header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -46,14 +45,14 @@ body {
 }
 .site-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 
-/* ── LAYOUT ── */
+
 .contenedor { max-width: 1300px; margin: 0 auto; padding: 24px; }
 
 .layout-principal { display: flex; gap: 30px; flex-wrap: wrap; }
 .listado { flex: 2; min-width: 400px; }
 .formulario-seccion { flex: 1; min-width: 300px; align-self: flex-start; position: sticky; top: 90px; }
 
-/* ── CARD CONTAINER (panel blanco → surface) ── */
+
 .card-container {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -70,7 +69,7 @@ h2 {
   color: var(--accent);
 }
 
-/* ── FILTROS ── */
+
 .filtros-controles { display: flex; gap: 12px; flex-wrap: wrap; }
 
 .search-input,
@@ -96,7 +95,7 @@ h2 {
   box-shadow: 0 0 0 3px rgba(232,168,56,.15);
 }
 
-/* ── GRID TARJETAS ── */
+
 .grid-tarjetas {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -111,7 +110,7 @@ h2 {
   grid-column: 1/-1;
 }
 
-/* ── TARJETA ── */
+
 .tarjeta {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -134,7 +133,7 @@ h2 {
 .tarjeta p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
 .tarjeta p strong { color: var(--text); }
 
-/* ── BOTONES TARJETA ── */
+
 .card-buttons {
   display: flex; gap: 8px;
   margin-top: auto; padding-top: 14px;
@@ -156,7 +155,7 @@ h2 {
 .btn-eliminar { background: rgba(231,76,60,.15); color: var(--danger); border: 1px solid rgba(231,76,60,.3) !important; }
 .btn-eliminar:hover { background: rgba(231,76,60,.25); }
 
-/* ── BOTONES GENERALES ── */
+
 .btn {
   border: none; cursor: pointer; border-radius: 8px;
   font-family: 'DM Sans', sans-serif; font-weight: 600;
@@ -170,7 +169,7 @@ h2 {
 .btn-danger { background: rgba(231,76,60,.15); color: var(--danger); border: 1px solid rgba(231,76,60,.3); }
 .btn-danger:hover { background: var(--danger); color: #fff; }
 
-/* ── FORMULARIO ── */
+
 .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
 .form-group label,
 form label {
@@ -201,7 +200,7 @@ form select:focus {
   box-shadow: 0 0 0 3px rgba(74,144,217,.15);
 }
 
-/* submit button override */
+
 #btn-submit {
   margin-top: 20px; width: 100%; padding: 12px;
   background: var(--accent); color: #fff;
@@ -212,7 +211,7 @@ form select:focus {
 }
 #btn-submit:hover { background: #5fa3e8; transform: translateY(-1px); }
 
-/* ── ERROR MSG ── */
+
 #mensaje-error {
   background: rgba(231,76,60,.15);
   border: 1px solid rgba(231,76,60,.4);
@@ -223,7 +222,7 @@ form select:focus {
   margin-bottom: 12px;
 }
 
-/* ── MODAL ── */
+
 .modal-overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.7);
@@ -263,10 +262,10 @@ form select:focus {
 }
 .detail-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
 
-/* ── UTILITIES ── */
+
 .oculto { display: none !important; }
 
-/* ── ANIMATIONS ── */
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -276,7 +275,7 @@ form select:focus {
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* ── RESPONSIVE ── */
+
 @media (max-width: 700px) {
   .layout-principal { flex-direction: column; }
   .listado, .formulario-seccion { min-width: unset; }
@@ -284,7 +283,7 @@ form select:focus {
   .detail-grid { grid-template-columns: 1fr; }
   .header-inner { flex-direction: column; align-items: flex-start; }
 }
-/* ── TOAST ── */
+
 .toast {
   position: fixed; bottom: 28px; right: 28px;
   padding: 14px 20px;
