@@ -1,70 +1,162 @@
-# Módulo de Tutorías y Asesorías — Grupo 3
+# Tutorías y Asesorías – Backend · Grupo 3
+**Universidad Técnica de Manabí · Actividad 5**
 
-## Descripción
-
-Aplicación web para gestionar tutorías y asesorías académicas. Permite a los estudiantes consultar las sesiones disponibles, solicitar nuevas asesorías, editarlas y eliminarlas, todo desde una interfaz sencilla y responsiva. Los datos se persisten en el navegador mediante `localStorage`, por lo que sobreviven al recargar la página.
+Backend REST construido con **Node.js + Express + MySQL2** para el módulo de Tutorías y Asesorías.
 
 ---
 
-## Características implementadas
+## Tecnologías
 
-### Visualización
-- **Listado en tarjetas** con información de cada tutoría: materia, docente, fecha y estado.
-- **Modal de detalles** que muestra información completa al hacer clic en "Ver Detalles".
+| Paquete    | Versión | Rol                             |
+|------------|---------|----------------------------------|
+| Node.js    | ≥ 18    | Entorno de ejecución             |
+| Express    | ^4.19   | Framework HTTP                   |
+| mysql2     | ^3.9    | Driver MariaDB/MySQL (promesas)  |
+| dotenv     | ^16.4   | Variables de entorno             |
+| cors       | ^2.8    | Cabeceras CORS                   |
+| nodemon    | ^3.1    | Recarga automática en desarrollo |
 
-### Búsqueda y filtrado
-- **Búsqueda en tiempo real** por nombre de docente.
-- **Filtro por materia** mediante un menú desplegable.
-- Ambos filtros se aplican de forma combinada e instantánea.
-
-### CRUD completo
-| Operación | Descripción |
-|-----------|-------------|
-| **Crear** | Formulario para registrar una nueva solicitud de asesoría con docente, materia y fecha. |
-| **Leer** | Las tarjetas y el modal muestran todos los datos de cada tutoría. |
-| **Editar** | El formulario se reutiliza para modificar una tutoría existente; el botón cambia de color para indicar el modo edición. |
-| **Eliminar** | Solicita confirmación antes de borrar permanentemente una tutoría. |
-
-### Validaciones del formulario
-- Todos los campos son obligatorios.
-- El nombre del docente debe tener al menos 3 caracteres.
-- Los errores se muestran en un mensaje destacado sobre el formulario.
-
-### Persistencia
-- Los datos se guardan automáticamente en `localStorage` tras cada operación (crear, editar, eliminar).
-- Al cargar la página por primera vez se usan los datos iniciales definidos en `data.js`.
+Base de datos: **MariaDB** en `grupofmo.com` · esquema `am_grupo3`.
 
 ---
 
 ## Estructura del proyecto
 
 ```
-/
-├── index.html      # Estructura HTML de la aplicación
-├── styles.css      # Estilos y diseño responsivo
-├── data.js         # Datos iniciales de tutorías
-├── app.js          # Lógica de la aplicación (CRUD, filtros, modal)
-└── readme.md       # Este archivo
+tutorias-backend/
+├── src/
+│   ├── app.js                     # Entrada: servidor Express
+│   ├── config/
+│   │   └── db.js                  # Pool de conexiones MariaDB
+│   ├── database/
+│   │   ├── schema.sql             # DDL tabla tutorias + 8 seeds
+│   │   └── seed.js                # Runner Node.js para el seed
+│   ├── models/
+│   │   └── tutoria.model.js       # Queries SQL (findAll, findById, create…)
+│   ├── services/
+│   │   └── tutoria.service.js     # Reglas de negocio (RN-01..RN-04)
+│   ├── controllers/
+│   │   └── tutoria.controller.js  # Handlers HTTP (req → service → res)
+│   ├── routes/
+│   │   └── tutoria.routes.js      # Registro de rutas Express
+│   └── middlewares/
+│       └── errorHandler.js        # Manejo global de errores
+├── .env.example                   # Plantilla de variables de entorno
+├── .gitignore
+├── package.json
+└── README.md
 ```
-
-### Materias disponibles
-- Programación Web
-- Matemáticas Discretas
-- Bases de Datos
-- Física
-- Ingeniería de Software
-- Redes
 
 ---
 
-## Instrucciones de uso
+## Configuración rápida
 
-1. **Abrir la aplicación**: Abrir `index.html` directamente en el navegador (no requiere servidor).
-2. **Explorar asesorías**: Las tarjetas se cargan automáticamente con los datos iniciales.
-3. **Filtrar**: Escribe un nombre en el buscador o selecciona una materia del menú.
-4. **Ver detalles**: Haz clic en **Ver Detalles** en cualquier tarjeta.
-5. **Solicitar una asesoría**: Rellena el formulario lateral y haz clic en **Registrar Solicitud**.
-6. **Editar**: Haz clic en **Editar** sobre la tarjeta deseada, modifica los campos y guarda.
-7. **Eliminar**: Haz clic en **Eliminar** y confirma la acción en el diálogo.
+```bash
+# 1. Clonar / descomprimir el proyecto
+# 2. Instalar dependencias
+npm install
 
-> **Nota:** Los datos se guardan en el `localStorage` del navegador. Limpiar los datos del sitio en el navegador restablecerá la lista a los valores iniciales.
+# 3. Crear archivo de entorno
+cp .env.example .env
+# Editar .env si fuera necesario
+
+# 4. Crear la tabla e insertar datos semilla
+npm run seed
+
+# 5. Arrancar en modo desarrollo
+npm run dev
+
+# 6. Arrancar en producción
+npm start
+```
+
+---
+
+## Variables de entorno (`.env`)
+
+```env
+PORT=3000
+NODE_ENV=development
+
+DB_HOST=grupofmo.com
+DB_PORT=3306
+DB_USER=grupo3
+DB_PASSWORD=Grup03.2026
+DB_NAME=am_grupo3
+```
+
+---
+
+## Endpoints disponibles
+
+| Método | Ruta                  | Descripción                         |
+|--------|-----------------------|-------------------------------------|
+| GET    | `/`                   | Health-check / info del módulo      |
+| GET    | `/api/tutorias`       | Listar todas las tutorías           |
+| GET    | `/api/tutorias/:id`   | Obtener una tutoría por ID          |
+| POST   | `/api/tutorias`       | Crear nueva tutoría                 |
+| PUT    | `/api/tutorias/:id`   | Actualizar tutoría existente        |
+| DELETE | `/api/tutorias/:id`   | Eliminar tutoría                    |
+
+### Filtros disponibles en GET /api/tutorias
+
+```
+GET /api/tutorias?estado=Disponible
+GET /api/tutorias?materia=Programación Web
+GET /api/tutorias?modalidad=Virtual
+```
+
+### Ejemplo de respuesta exitosa
+
+```json
+{
+  "ok": true,
+  "total": 8,
+  "data": [
+    {
+      "id": 1,
+      "docente": "Carlos Gómez",
+      "materia": "Matemáticas Discretas",
+      "horario": "Lunes 08:00–10:00",
+      "modalidad": "Presencial",
+      "cupos": 10,
+      "estado": "Disponible",
+      "descripcion": "Práctica de grafos, lógica proposicional y combinatoria.",
+      "creado_en": "2026-06-02T00:00:00.000Z"
+    }
+  ]
+}
+```
+
+### Ejemplo de cuerpo para POST /api/tutorias
+
+```json
+{
+  "docente":    "Pedro Ramírez",
+  "materia":    "Bases de Datos",
+  "horario":    "Viernes 10:00–12:00",
+  "modalidad":  "Virtual",
+  "cupos":      8,
+  "descripcion":"Repaso de normalización y optimización de consultas."
+}
+```
+
+---
+
+## Reglas de negocio implementadas
+
+| ID    | Regla                                                                            |
+|-------|----------------------------------------------------------------------------------|
+| RN-01 | Toda tutoría nueva se crea con estado **"Disponible"** automáticamente.           |
+| RN-02 | Solo se aceptan materias del catálogo oficial (6 materias definidas).            |
+| RN-03 | El número de cupos debe ser un entero entre **1 y 20**.                          |
+| RN-04 | No se puede crear directamente una tutoría con estado **"Cancelada"**.           |
+
+---
+
+## Instrucciones para Postman
+
+1. Importar la colección o crear las peticiones manualmente.
+2. Base URL: `http://localhost:3000`
+3. Para POST/PUT: en **Body → raw → JSON** enviar el objeto correspondiente.
+4. Verificar que el header `Content-Type: application/json` esté presente.

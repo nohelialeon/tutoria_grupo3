@@ -1,0 +1,23 @@
+{
+  "name": "tutorias-backend",
+  "version": "1.0.0",
+  "description": "Backend del módulo de Tutorías y Asesorías – Grupo 3",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "seed": "node src/database/seed.js"
+  },
+  "keywords": ["tutorias", "asesorias", "grupo3"],
+  "author": "Grupo 3 – UTM",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
